@@ -615,7 +615,7 @@ void MainWindow::showNoMasterMessage() {
 void MainWindow::inform(QString strdata)
 {
     QMessageBox m_r;
-    m_r.setWindowTitle("提示");
+    m_r.setWindowTitle("Hint");
     m_r.setText(strdata);
     m_r.exec();
 }
@@ -623,10 +623,10 @@ bool MainWindow::AskInform(QString strdata)
 {
     QMessageBox m_r;
 
-    m_r.setWindowTitle("提示");
+    m_r.setWindowTitle("Hint");
     m_r.setText(strdata);
-    m_r.addButton(tr("确认"), QMessageBox::ActionRole);
-    m_r.addButton(tr("取消"), QMessageBox::ActionRole);
+    m_r.addButton(tr("Confirm"), QMessageBox::ActionRole);
+    m_r.addButton(tr("Cancel"), QMessageBox::ActionRole);
 
     int isok = m_r.exec();
     if (isok == 1)
@@ -663,7 +663,7 @@ void MainWindow::slot_rosShutdown()
 {
     ui->label_robot_staue_img->setPixmap(QPixmap::fromImage(QImage("://images/offline.png")));
      ui->label_statue_text->setStyleSheet("color:red;");
-    ui->label_statue_text->setText("离线");
+    ui->label_statue_text->setText("Offline");
     ui->button_connect->setEnabled(true);
     ui->line_edit_master->setReadOnly(false);
     ui->line_edit_host->setReadOnly(false);
@@ -687,15 +687,15 @@ void MainWindow::slot_power(float p)
 }
 void MainWindow::slot_speed_x(double x)
 {
-    if(x>=0) ui->label_dir_x->setText("正向");
-    else ui->label_dir_x->setText("反向");
+    if(x>=0) ui->label_dir_x->setText("Forward");
+    else ui->label_dir_x->setText("Backward");
 
     m_DashBoard_x->setValue(abs(x*100));
 }
 void MainWindow::slot_speed_y(double x)
 {
-    if(x>=0) ui->label_dir_y->setText("正向");
-    else ui->label_dir_y->setText("反向");
+    if(x>=0) ui->label_dir_y->setText("Forward");
+    else ui->label_dir_y->setText("Backward");
     m_DashBoard_y->setValue(abs(x*100));
 }
 void MainWindow::on_checkbox_use_environment_stateChanged(int state) {
@@ -899,10 +899,10 @@ void cyrobot_monitor::MainWindow::on_button_connect_clicked()
         if ( !qnode.init() )
         {
             //showNoMasterMessage();
-            QMessageBox::warning(nullptr, "失败", "连接ROS Master失败！请检查你的网络或连接字符串！", QMessageBox::Yes, QMessageBox::Yes);
+            QMessageBox::warning(nullptr, "Error", "Connect to ROS Master failed！Please check your necwork！", QMessageBox::Yes, QMessageBox::Yes);
             ui->label_robot_staue_img->setPixmap(QPixmap::fromImage(QImage("://images/offline.png")));
             ui->label_statue_text->setStyleSheet("color:red;");
-            ui->label_statue_text->setText("离线");
+            ui->label_statue_text->setText("Offline");
             ui->tab_manager->setTabEnabled(1,false);
             ui->tabWidget->setTabEnabled(1,false);
             ui->groupBox_3->setEnabled(false);
@@ -914,10 +914,10 @@ void cyrobot_monitor::MainWindow::on_button_connect_clicked()
     {
         if ( !qnode.init(ui->line_edit_master->text().toStdString(), ui->line_edit_host->text().toStdString()) )
         {
-            QMessageBox::warning(nullptr, "失败", "连接ROS Master失败！请检查你的网络或连接字符串！", QMessageBox::Yes, QMessageBox::Yes);
+            QMessageBox::warning(nullptr, "Error", "Connect to ROS Master failed！Please check your necwork！", QMessageBox::Yes, QMessageBox::Yes);
             ui->label_robot_staue_img->setPixmap(QPixmap::fromImage(QImage("://images/offline.png")));
             ui->label_statue_text->setStyleSheet("color:red;");
-            ui->label_statue_text->setText("离线");
+            ui->label_statue_text->setText("Offline");
             ui->tab_manager->setTabEnabled(1,false);
             ui->tabWidget->setTabEnabled(1,false);
             ui->groupBox_3->setEnabled(false);
@@ -941,7 +941,7 @@ void cyrobot_monitor::MainWindow::on_button_connect_clicked()
     ui->button_connect->setEnabled(false);
     ui->label_robot_staue_img->setPixmap(QPixmap::fromImage(QImage("://images/online.png")));
     ui->label_statue_text->setStyleSheet("color:green;");
-    ui->label_statue_text->setText("在线");
+    ui->label_statue_text->setText("Online");
     ui->button_disconnect->setEnabled(true);
     //初始化视频订阅的显示
     initVideos();
@@ -973,7 +973,7 @@ void cyrobot_monitor::MainWindow::on_pushButton_rvizReadDisplaySet_clicked()
     {
         return;
     }
-    QString path = QFileDialog::getOpenFileName(this, "导入 RVIZ Display 配置", "/home/" + getUserName() + "/", "YAML(*.yaml);;ALL(*.*)");
+    QString path = QFileDialog::getOpenFileName(this, "Import RVIZ Display Setting", "/home/" + getUserName() + "/", "YAML(*.yaml);;ALL(*.*)");
     if (!path.isEmpty())
     {
         map_rviz_->ReadDisplaySet(path);
@@ -986,7 +986,7 @@ void cyrobot_monitor::MainWindow::on_pushButton_rvizSaveDisplaySet_clicked()
     {
         return;
     }
-    QString path = QFileDialog::getSaveFileName(this, "导出 RVIZ Display 配置", "/home/" + getUserName() + "/", "YAML(*.yaml)");
+    QString path = QFileDialog::getSaveFileName(this, "Export  RVIZ Display Setting", "/home/" + getUserName() + "/", "YAML(*.yaml)");
     
     if (!path.isEmpty())
     {

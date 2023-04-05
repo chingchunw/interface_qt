@@ -1019,5 +1019,5 @@ void cyrobot_monitor::MainWindow::on_rviz_map_clicked()
 
 void cyrobot_monitor::MainWindow::on_Realsense_clicked()
 {
-  system("gnome-terminal -- bash -c 'source /opt/ros/noetic/setup.bash; source /home/chun/realsense_ws/devel/setup.bash ;roslaunch realsense2_camera rs_camera.launch '&");
+    system("gnome-terminal -- bash -c 'source /opt/ros/noetic/setup.bash; source /home/chun/realsense_ws/devel/setup.bash ;roslaunch realsense2_camera rs_camera.launch '&");
 }

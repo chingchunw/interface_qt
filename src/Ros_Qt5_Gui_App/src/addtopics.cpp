@@ -136,15 +136,15 @@ void AddTopics::initUi()
     PointCloud2->setIcon(0,QIcon("://images/classes/PointCloud2.png"));
     parent->addChild(PointCloud2);
 
-     PointStamped=new QTreeWidgetItem(QStringList()<<"PointStamped");
+    PointStamped=new QTreeWidgetItem(QStringList()<<"PointStamped");
     PointStamped->setIcon(0,QIcon("://images/classes/PointStamped.png"));
     parent->addChild(PointStamped);
 
-     Polygon=new QTreeWidgetItem(QStringList()<<"Polygon");
+    Polygon=new QTreeWidgetItem(QStringList()<<"Polygon");
     Polygon->setIcon(0,QIcon("://images/classes/Polygon.png"));
     parent->addChild(Polygon);
 
-     Pose=new QTreeWidgetItem(QStringList()<<"Pose");
+    Pose=new QTreeWidgetItem(QStringList()<<"Pose");
     Pose->setIcon(0,QIcon("://images/classes/Pose.png"));
     parent->addChild(Pose);
 
@@ -152,11 +152,11 @@ void AddTopics::initUi()
     PoseArray->setIcon(0,QIcon("://images/classes/PoseArray.png"));
     parent->addChild(PoseArray);
 
-     PoseWithCovariance=new QTreeWidgetItem(QStringList()<<"PoseWithCovariance");
+    PoseWithCovariance=new QTreeWidgetItem(QStringList()<<"PoseWithCovariance");
     PoseWithCovariance->setIcon(0,QIcon("://images/classes/PoseWithCovariance.png"));
     parent->addChild(PoseWithCovariance);
 
-     Range=new QTreeWidgetItem(QStringList()<<"Range");
+    Range=new QTreeWidgetItem(QStringList()<<"Range");
     Range->setIcon(0,QIcon("://images/classes/Range.png"));
     parent->addChild(Range);
 
@@ -164,15 +164,15 @@ void AddTopics::initUi()
     RelativeHumidity->setIcon(0,QIcon("://images/classes/RelativeHumidity.png"));
     parent->addChild(RelativeHumidity);
 
-     RobotModel=new QTreeWidgetItem(QStringList()<<"RobotModel");
+    RobotModel=new QTreeWidgetItem(QStringList()<<"RobotModel");
     RobotModel->setIcon(0,QIcon("://images/classes/RobotModel.png"));
     parent->addChild(RobotModel);
 
-     TF=new QTreeWidgetItem(QStringList()<<"TF");
+    TF=new QTreeWidgetItem(QStringList()<<"TF");
     TF->setIcon(0,QIcon("://images/classes/TF.png"));
     parent->addChild(TF);
 
-     Temperature=new QTreeWidgetItem(QStringList()<<"Temperature");
+    Temperature=new QTreeWidgetItem(QStringList()<<"Temperature");
     Temperature->setIcon(0,QIcon("://images/classes/Temperature.png"));
     parent->addChild(Temperature);
 

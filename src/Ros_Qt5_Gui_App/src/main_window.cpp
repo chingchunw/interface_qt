@@ -225,20 +225,8 @@ void MainWindow::connections()
     //绑定快捷按钮相关函数
     connect(ui->quick_cmd_add_btn,SIGNAL(clicked()),this,SLOT(quick_cmd_add()));
     connect(ui->quick_cmd_remove_btn,SIGNAL(clicked()),this,SLOT(quick_cmd_remove()));
-    //绑定slider的函数
-    connect(ui->horizontalSlider_raw,SIGNAL(valueChanged(int)),this,SLOT(on_Slider_raw_valueChanged(int)));
-    connect(ui->horizontalSlider_linear,SIGNAL(valueChanged(int)),this,SLOT(on_Slider_linear_valueChanged(int)));
     //设置界面
     connect(ui->action_2,SIGNAL(triggered(bool)),this,SLOT(slot_setting_frame()));
-    //绑定速度控制按钮
-    connect(ui->pushButton_i,SIGNAL(clicked()),this,SLOT(slot_cmd_control()));
-    connect(ui->pushButton_u,SIGNAL(clicked()),this,SLOT(slot_cmd_control()));
-    connect(ui->pushButton_o,SIGNAL(clicked()),this,SLOT(slot_cmd_control()));
-    connect(ui->pushButton_j,SIGNAL(clicked()),this,SLOT(slot_cmd_control()));
-    connect(ui->pushButton_l,SIGNAL(clicked()),this,SLOT(slot_cmd_control()));
-    connect(ui->pushButton_m,SIGNAL(clicked()),this,SLOT(slot_cmd_control()));
-    connect(ui->pushButton_back,SIGNAL(clicked()),this,SLOT(slot_cmd_control()));
-    connect(ui->pushButton_backr,SIGNAL(clicked()),this,SLOT(slot_cmd_control()));
     //设置2D Pose
     connect(ui->set_pos_btn,SIGNAL(clicked()),this,SLOT(slot_set_2D_Pos()));
     //设置2D goal
@@ -247,10 +235,6 @@ void MainWindow::connections()
     connect(ui->move_camera_btn,SIGNAL(clicked()),this,SLOT(slot_move_camera_btn()));
     //设置Select
     connect(ui->set_select_btn,SIGNAL(clicked()),this,SLOT(slot_set_select()));
-    //左工具栏tab索引改变
-    connect(ui->tab_manager,SIGNAL(currentChanged(int)),this,SLOT(slot_tab_manage_currentChanged(int)));
-    //右工具栏索引改变
-    connect(ui->tabWidget,SIGNAL(currentChanged(int)),this,SLOT(slot_tab_Widget_currentChanged(int)));
     //刷新话题列表
     connect(ui->refreash_topic_btn,SIGNAL(clicked()),this,SLOT(refreashTopicList()));
 }
@@ -348,85 +332,6 @@ QString MainWindow::JudgeDisplayNewName(QString name)
     }
     return name;
 }
-
-//左工具栏索引改变
-void MainWindow::slot_tab_manage_currentChanged(int index)
-{
-    switch (index) {
-    case 0:
-
-        break;
-    case 1:
-
-        ui->tabWidget->setCurrentIndex(1);
-        break;
-    case 2:
-        break;
-
-    }
-}
-//右工具栏索引改变
-void MainWindow::slot_tab_Widget_currentChanged(int index)
-{
-    switch (index) {
-    case 0:
-
-        break;
-    case 1:
-        ui->tab_manager->setCurrentIndex(1);
-        break;
-    case 2:
-        break;
-
-    }
-}
-//速度控制相关按钮处理槽函数
-void MainWindow::slot_cmd_control()
-{
-
-    QPushButton* btn=qobject_cast<QPushButton*>(sender());
-    char key=btn->text().toStdString()[0];
-    //速度
-    float liner=ui->horizontalSlider_linear->value()*0.01f;
-    float turn=ui->horizontalSlider_raw->value()*0.01f;
-    bool is_all=ui->checkBox_use_all->isChecked();
-    switch (key) {
-        case 'u':
-            qnode.move_base(is_all?'U':'u',liner,turn);
-        break;
-        case 'i':
-            qnode.move_base(is_all?'I':'i',liner,turn);
-        break;
-        case 'o':
-            qnode.move_base(is_all?'O':'o',liner,turn);
-        break;
-        case 'j':
-            qnode.move_base(is_all?'J':'j',liner,turn);
-        break;
-        case 'l':
-            qnode.move_base(is_all?'L':'l',liner,turn);
-        break;
-        case 'm':
-            qnode.move_base(is_all?'M':'m',liner,turn);
-        break;
-        case ',':
-            qnode.move_base(is_all?'<':',',liner,turn);
-        break;
-        case '.':
-            qnode.move_base(is_all?'>':'.',liner,turn);
-        break;
-    }
-}
-//滑动条处理槽函数
-void MainWindow::on_Slider_raw_valueChanged(int v)
-{
-    ui->label_raw->setText(QString::number(v));
-}
-//滑动条处理槽函数
-void MainWindow::on_Slider_linear_valueChanged(int v)
-{
-    ui->label_linear->setText(QString::number(v));
-}
 //快捷指令删除按钮
 void MainWindow::quick_cmd_remove()
 {
@@ -445,8 +350,6 @@ void MainWindow::quick_cmd_remove()
         ui->treeWidget_quick_cmd->takeTopLevelItem(ui->treeWidget_quick_cmd->indexOfTopLevelItem(parent));
         delete parent;
     }
-
-
 }
 //快捷指令添加按钮
 void MainWindow::quick_cmd_add()
@@ -607,7 +510,7 @@ void MainWindow::refreashTopicList()
 void MainWindow::slot_rosShutdown()
 {
     ui->label_robot_staue_img->setPixmap(QPixmap::fromImage(QImage("://images/offline.png")));
-     ui->label_statue_text->setStyleSheet("color:red;");
+    ui->label_statue_text->setStyleSheet("color:red;");
     ui->label_statue_text->setText("Offline");
     ui->button_connect->setEnabled(true);
     ui->line_edit_master->setReadOnly(false);
@@ -628,17 +531,7 @@ void MainWindow::slot_speed_y(double x)
     else ui->label_dir_y->setText("Backward");
     m_DashBoard_y->setValue(abs(x*100));
 }
-void MainWindow::on_checkbox_use_environment_stateChanged(int state) {
-	bool enabled;
-	if ( state == 0 ) {
-		enabled = true;
-	} else {
-		enabled = false;
-	}
-	ui->line_edit_master->setEnabled(enabled);
-	ui->line_edit_host->setEnabled(enabled);
-	//ui->line_edit_topic->setEnabled(enabled);
-}
+
 
 /*****************************************************************************
 ** Implemenation [Slots][manually connected]
@@ -677,19 +570,6 @@ void MainWindow::ReadSettings() {
     //ui->line_edit_topic->setText(topic_name);
     bool remember = settings.value("remember_settings", false).toBool();
     ui->checkbox_remember_settings->setChecked(remember);
-    bool checked = settings.value("use_environment_variables", false).toBool();
-    ui->checkbox_use_environment->setChecked(checked);
-    if ( checked ) {
-    	ui->line_edit_master->setEnabled(false);
-    	ui->line_edit_host->setEnabled(false);
-    	//ui->line_edit_topic->setEnabled(false);
-    }
-
-//    QSettings return_pos("return-position","cyrobot_rviz_tree");
-//    ui->label_return_x->setText(return_pos.value("x",QString("0")).toString());
-//    ui->label_return_y->setText(return_pos.value("y",QString("0")).toString());
-//    ui->label_return_z->setText(return_pos.value("z",QString("0")).toString());
-//    ui->label_return_w->setText(return_pos.value("w",QString("0")).toString());
 
     //读取快捷指令的setting
     QSettings quick_setting("quick_setting","cyrobot_rviz_tree");
@@ -706,7 +586,6 @@ void MainWindow::WriteSettings() {
     settings.setValue("master_url",ui->line_edit_master->text());
     settings.setValue("host_url",ui->line_edit_host->text());
     //settings.setValue("topic_name",ui->line_edit_topic->text());
-    settings.setValue("use_environment_variables",QVariant(ui->checkbox_use_environment->isChecked()));
     settings.setValue("geometry", saveGeometry());
     //settings.setValue("windowState", saveState());
     settings.setValue("remember_settings",QVariant(ui->checkbox_remember_settings->isChecked()));
@@ -823,50 +702,24 @@ void cyrobot_monitor::MainWindow::on_treeView_rvizDisplayTree_clicked(const QMod
 /// \brief 连接ROS
 void cyrobot_monitor::MainWindow::on_button_connect_clicked()
 {
-    //如果使用环境变量
-    if ( ui->checkbox_use_environment->isChecked() )
-    {
-        if ( !qnode.init() )
-        {
-            //showNoMasterMessage();
-            QMessageBox::warning(nullptr, "Error", "Connect to ROS Master failed！Please check your necwork！", QMessageBox::Yes, QMessageBox::Yes);
-            ui->label_robot_staue_img->setPixmap(QPixmap::fromImage(QImage("://images/offline.png")));
-            ui->label_statue_text->setStyleSheet("color:red;");
-            ui->label_statue_text->setText("Offline");
-            ui->tab_manager->setTabEnabled(1,false);
-            ui->tabWidget->setTabEnabled(1,false);
-            ui->groupBox_3->setEnabled(false);
-            return ;
-        }
-    }
-    //如果不使用环境变量
-    else
-    {
-        if ( !qnode.init(ui->line_edit_master->text().toStdString(), ui->line_edit_host->text().toStdString()) )
-        {
-            QMessageBox::warning(nullptr, "Error", "Connect to ROS Master failed！Please check your necwork！", QMessageBox::Yes, QMessageBox::Yes);
-            ui->label_robot_staue_img->setPixmap(QPixmap::fromImage(QImage("://images/offline.png")));
-            ui->label_statue_text->setStyleSheet("color:red;");
-            ui->label_statue_text->setText("Offline");
-            ui->tab_manager->setTabEnabled(1,false);
-            ui->tabWidget->setTabEnabled(1,false);
-            ui->groupBox_3->setEnabled(false);
-            //showNoMasterMessage();
-            return ;
-        }
-        else
-        {
-            ui->line_edit_master->setReadOnly(true);
-            ui->line_edit_host->setReadOnly(true);
-            ui->line_edit_topic->setReadOnly(true);
-        }
-    }
+      if ( !qnode.init() )
+      {
+          //showNoMasterMessage();
+          QMessageBox::warning(nullptr, "Error", "Connect to ROS Master failed！Please check your necwork！", QMessageBox::Yes, QMessageBox::Yes);
+          ui->label_robot_staue_img->setPixmap(QPixmap::fromImage(QImage("://images/offline.png")));
+          ui->label_statue_text->setStyleSheet("color:red;");
+          ui->label_statue_text->setText("Offline");
+          ui->tab_manager->setTabEnabled(1,false);
+          ui->tabWidget->setTabEnabled(1,false);
+          ui->groupBox_3->setEnabled(false);
+          return ;
+      }
+
     ui->tab_manager->setTabEnabled(1,true);
     ui->tabWidget->setTabEnabled(1,true);
     ui->groupBox_3->setEnabled(true);
     //初始化rviz
     initRviz();
-    
     
     ui->button_connect->setEnabled(false);
     ui->label_robot_staue_img->setPixmap(QPixmap::fromImage(QImage("://images/online.png")));

@@ -79,7 +79,7 @@ class MainWindow : public QMainWindow
       ** Auto-connections (connectSlotsByName())
       *******************************************/
         void on_actionAbout_triggered();
-        void on_checkbox_use_environment_stateChanged(int state);
+//        void on_checkbox_use_environment_stateChanged(int state);
         void slot_speed_x(double x);
         void slot_speed_y(double y);
         void slot_rosShutdown();
@@ -92,11 +92,6 @@ class MainWindow : public QMainWindow
         ** Manual connections
         *******************************************/
         void updateLoggingView(); // no idea why this can't connect automatically
-        void on_Slider_raw_valueChanged(int value);
-        void on_Slider_linear_valueChanged(int value);
-        void slot_cmd_control();
-        void slot_tab_manage_currentChanged(int);
-        void slot_tab_Widget_currentChanged(int);
         void slot_choose_topic(QTreeWidgetItem *choose, QString name);
         void slot_set_2D_Goal();
         void slot_set_2D_Pos();
@@ -107,12 +102,10 @@ class MainWindow : public QMainWindow
         void quick_cmd_add();
         void quick_cmd_remove();
         //显示图像
-        //显示图像
         void slot_show_image(int,QImage);
     //    void on_horizontalSlider_raw_valueChanged(int value);
     private slots:
-    
-    
+       
         void on_pushButton_add_topic_clicked();
         void on_pushButton_remove_topic_clicked();       
         void on_pushButton_rename_topic_clicked();       
@@ -123,13 +116,9 @@ class MainWindow : public QMainWindow
         void on_pushButton_rvizReadDisplaySet_clicked();
         /// \brief 导出rviz Display配置
         void on_pushButton_rvizSaveDisplaySet_clicked();
-        
-        void on_button_connect_clicked();
-        
+        void on_button_connect_clicked();      
         void on_roscore_clicked();
-
         void on_rviz_map_clicked();
-
         void on_Realsense_clicked();
 
 private:

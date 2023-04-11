@@ -122,7 +122,7 @@
            <locale language="English" country="Australia"/>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="tab_3">
            <attribute name="title">
@@ -812,6 +812,20 @@
                  <string>Master Topic</string>
                 </property>
                 <layout class="QGridLayout" name="gridLayout">
+                 <item row="9" column="1">
+                  <widget class="QPushButton" name="roscore">
+                   <property name="text">
+                    <string>Roscore</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="10" column="0">
+                  <widget class="QPushButton" name="button_disconnect">
+                   <property name="text">
+                    <string>🔗Disconnected</string>
+                   </property>
+                  </widget>
+                 </item>
                  <item row="4" column="1">
                   <widget class="QLineEdit" name="line_edit_topic">
                    <property name="enabled">
@@ -822,17 +836,7 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="6" column="0" colspan="4">
-                  <widget class="QCheckBox" name="checkbox_use_environment">
-                   <property name="layoutDirection">
-                    <enum>Qt::RightToLeft</enum>
-                   </property>
-                   <property name="text">
-                    <string>-----</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="10" column="0">
+                 <item row="9" column="0">
                   <widget class="QPushButton" name="button_connect">
                    <property name="enabled">
                     <bool>true</bool>
@@ -858,23 +862,6 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="1">
-                  <widget class="QLineEdit" name="line_edit_master">
-                   <property name="text">
-                    <string>http://192.168.100.108:11311/</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="7" column="0" colspan="4">
-                  <widget class="QCheckBox" name="checkbox_remember_settings">
-                   <property name="layoutDirection">
-                    <enum>Qt::RightToLeft</enum>
-                   </property>
-                   <property name="text">
-                    <string>-----</string>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="2" column="0">
                   <widget class="QLabel" name="label_2">
                    <property name="maximumSize">
@@ -891,6 +878,56 @@
                    </property>
                    <property name="text">
                     <string>Localhost IP</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="0">
+                  <widget class="QLabel" name="label_3">
+                   <property name="maximumSize">
+                    <size>
+                     <width>100</width>
+                     <height>32</height>
+                    </size>
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <property name="text">
+                    <string>Ros Hostname</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QLineEdit" name="line_edit_master">
+                   <property name="text">
+                    <string>http://192.168.100.108:11311/</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="2">
+                  <widget class="QPushButton" name="Realsense">
+                   <property name="text">
+                    <string>Realsense</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="10" column="1">
+                  <widget class="QPushButton" name="rviz_map">
+                   <property name="text">
+                    <string>rviz_map</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="6" column="0" colspan="4">
+                  <widget class="QCheckBox" name="checkbox_remember_settings">
+                   <property name="layoutDirection">
+                    <enum>Qt::RightToLeft</enum>
+                   </property>
+                   <property name="text">
+                    <string>-----</string>
                    </property>
                   </widget>
                  </item>
@@ -926,53 +963,6 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="4" column="0">
-                  <widget class="QLabel" name="label_3">
-                   <property name="maximumSize">
-                    <size>
-                     <width>100</width>
-                     <height>32</height>
-                    </size>
-                   </property>
-                   <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
-                   </property>
-                   <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
-                   </property>
-                   <property name="text">
-                    <string>Ros Hostname</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="11" column="0">
-                  <widget class="QPushButton" name="button_disconnect">
-                   <property name="text">
-                    <string>🔗Disconnected</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="10" column="1">
-                  <widget class="QPushButton" name="roscore">
-                   <property name="text">
-                    <string>Roscore</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="11" column="1">
-                  <widget class="QPushButton" name="rviz_map">
-                   <property name="text">
-                    <string>rviz_map</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="10" column="2">
-                  <widget class="QPushButton" name="Realsense">
-                   <property name="text">
-                    <string>Realsense</string>
-                   </property>
-                  </widget>
-                 </item>
                 </layout>
                </widget>
               </item>
@@ -983,179 +973,7 @@
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_10">
                  <item>
-                  <layout class="QGridLayout" name="gridLayout_6">
-                   <item row="4" column="1">
-                    <widget class="QSlider" name="horizontalSlider_linear">
-                     <property name="maximum">
-                      <number>100</number>
-                     </property>
-                     <property name="singleStep">
-                      <number>1</number>
-                     </property>
-                     <property name="value">
-                      <number>50</number>
-                     </property>
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="4" column="2">
-                    <widget class="QLabel" name="label_linear">
-                     <property name="text">
-                      <string/>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="0">
-                    <widget class="QPushButton" name="pushButton_j">
-                     <property name="styleSheet">
-                      <string notr="true">QPushButton#pushButton_j:pressed{background-color:rgb(239, 41, 41)}</string>
-                     </property>
-                     <property name="text">
-                      <string/>
-                     </property>
-                     <property name="shortcut">
-                      <string>J</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="2">
-                    <widget class="QPushButton" name="pushButton_l">
-                     <property name="styleSheet">
-                      <string notr="true">QPushButton#pushButton_l:pressed{background-color:rgb(239, 41, 41)}</string>
-                     </property>
-                     <property name="text">
-                      <string/>
-                     </property>
-                     <property name="shortcut">
-                      <string>L</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="3" column="1">
-                    <widget class="QSlider" name="horizontalSlider_raw">
-                     <property name="maximum">
-                      <number>100</number>
-                     </property>
-                     <property name="value">
-                      <number>100</number>
-                     </property>
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="1">
-                    <widget class="QCheckBox" name="checkBox_use_all">
-                     <property name="text">
-                      <string/>
-                     </property>
-                     <property name="shortcut">
-                      <string>K</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="4" column="0">
-                    <widget class="QLabel" name="label_9">
-                     <property name="text">
-                      <string/>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="1">
-                    <widget class="QPushButton" name="pushButton_back">
-                     <property name="styleSheet">
-                      <string notr="true">QPushButton#pushButton_back:pressed{background-color:rgb(239, 41, 41)}</string>
-                     </property>
-                     <property name="text">
-                      <string/>
-                     </property>
-                     <property name="shortcut">
-                      <string>,</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="0" column="2">
-                    <widget class="QPushButton" name="pushButton_o">
-                     <property name="styleSheet">
-                      <string notr="true">QPushButton#pushButton_o:pressed{background-color:rgb(239, 41, 41)}</string>
-                     </property>
-                     <property name="text">
-                      <string/>
-                     </property>
-                     <property name="shortcut">
-                      <string>O</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="2">
-                    <widget class="QPushButton" name="pushButton_backr">
-                     <property name="styleSheet">
-                      <string notr="true">QPushButton#pushButton_backr:pressed{background-color:rgb(239, 41, 41)}</string>
-                     </property>
-                     <property name="text">
-                      <string/>
-                     </property>
-                     <property name="shortcut">
-                      <string>.</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="0" column="1">
-                    <widget class="QPushButton" name="pushButton_i">
-                     <property name="styleSheet">
-                      <string notr="true">QPushButton#pushButton_u:pressed{background-color:rgb(239, 41, 41)}</string>
-                     </property>
-                     <property name="text">
-                      <string/>
-                     </property>
-                     <property name="shortcut">
-                      <string>I</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="0">
-                    <widget class="QPushButton" name="pushButton_m">
-                     <property name="styleSheet">
-                      <string notr="true">QPushButton#pushButton_m:pressed{background-color:rgb(239, 41, 41)}</string>
-                     </property>
-                     <property name="text">
-                      <string/>
-                     </property>
-                     <property name="shortcut">
-                      <string>M</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="3" column="0">
-                    <widget class="QLabel" name="label_14">
-                     <property name="text">
-                      <string/>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="0" column="0">
-                    <widget class="QPushButton" name="pushButton_u">
-                     <property name="styleSheet">
-                      <string notr="true">QPushButton#pushButton_u:pressed{background-color:rgb(239, 41, 41)}</string>
-                     </property>
-                     <property name="text">
-                      <string/>
-                     </property>
-                     <property name="shortcut">
-                      <string>U</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="3" column="2">
-                    <widget class="QLabel" name="label_raw">
-                     <property name="text">
-                      <string/>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
+                  <layout class="QGridLayout" name="gridLayout_6"/>
                  </item>
                 </layout>
                </widget>
@@ -1466,26 +1284,6 @@ color:rgb(238, 238, 236);</string>
         </item>
         <item>
          <widget class="QLabel" name="label_17">
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_20">
-          <property name="maximumSize">
-           <size>
-            <width>100</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>状态：</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_staue">
           <property name="text">
            <string/>
           </property>

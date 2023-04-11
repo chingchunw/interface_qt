@@ -136,61 +136,6 @@ void MainWindow::initData()
     m_mapRvizDisplays.insert("WrenchStamped", RVIZ_DISPLAY_WRENCHSTAMPED);
 }
 
-//订阅video话题
-void MainWindow::initVideos()
-{
-   //創建QSettings Object -> 通過指定公司或組織名稱以及產品名稱，例如：公司名稱爲：video_topic，產品名爲：cyrobot_monitor
-   QSettings video_topic_setting("video_topic","cyrobot_monitor");
-   QStringList names = video_topic_setting.value("names").toStringList();
-   QStringList topics = video_topic_setting.value("topics").toStringList();
-   //"/home/chun/.config/video_topic/cyrobot_monitor.conf"
-   //qDebug() << video_topic_setting.filename();
-   qDebug() << video_topic_setting.value("names") << "///" << video_topic_setting.value("topics");  //QVariant(Invalid)
-   if(names.size()>=4)
-   {
-       ui->label_v_name0->setText(names[0]);
-       ui->label_v_name1->setText(names[1]);
-       ui->label_v_name2->setText(names[2]);
-       ui->label_v_name3->setText(names[3]);
-   }
-   if(topics.size()>=4)
-   {
-       if(topics[0]!="")
-        qnode.Sub_Image(topics[0],0);
-       if(topics[1]!="")
-        qnode.Sub_Image(topics[1],1);
-       if(topics[2]!="")
-        qnode.Sub_Image(topics[2],2);
-       if(topics[3]!="")
-        qnode.Sub_Image(topics[3],3);
-
-   }
-
-   //QObject::connect(監聽的物件, 監聽的事件, 事件接收者, 事件的處理函數);
-   connect(&qnode,SIGNAL(Show_image(int,QImage)),this,SLOT(slot_show_image(int,QImage)));
-
-
-}
-void MainWindow::slot_show_image(int frame_id, QImage image)
-{
-    switch (frame_id)
-    {
-    case 0:
-        ui->label_video0->setPixmap(QPixmap::fromImage(image).scaled(ui->label_video0->width(),ui->label_video0->height()));
-        break;
-    case 1:
-        ui->label_video1->setPixmap(QPixmap::fromImage(image).scaled(ui->label_video1->width(),ui->label_video1->height()));
-        break;
-    case 2:
-        ui->label_video2->setPixmap(QPixmap::fromImage(image).scaled(ui->label_video2->width(),ui->label_video2->height()));
-        break;
-    case 3:
-        ui->label_video3->setPixmap(QPixmap::fromImage(image).scaled(ui->label_video3->width(),ui->label_video3->height()));
-        break;
-    }
-}
-
-
 void MainWindow::initRviz()
 {
     ui->label_rvizShow->hide();
@@ -726,8 +671,6 @@ void cyrobot_monitor::MainWindow::on_button_connect_clicked()
     ui->label_statue_text->setStyleSheet("color:green;");
     ui->label_statue_text->setText("Online");
     ui->button_disconnect->setEnabled(true);
-    //初始化视频订阅的显示
-    initVideos();
     //显示话题列表
     initTopicList();
 }

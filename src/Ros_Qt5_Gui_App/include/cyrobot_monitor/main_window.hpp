@@ -72,7 +72,6 @@ class MainWindow : public QMainWindow
       void showNoMasterMessage();
         void initRviz();
         void initUis();
-        void initVideos();
         void initTopicList();
     public slots:
       /******************************************
@@ -101,9 +100,6 @@ class MainWindow : public QMainWindow
         void slot_setting_frame();
         void quick_cmd_add();
         void quick_cmd_remove();
-        //显示图像
-        void slot_show_image(int,QImage);
-    //    void on_horizontalSlider_raw_valueChanged(int value);
     private slots:
        
         void on_pushButton_add_topic_clicked();

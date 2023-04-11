@@ -367,83 +367,7 @@
            <attribute name="title">
             <string>Basic</string>
            </attribute>
-           <layout class="QVBoxLayout" name="verticalLayout_13">
-            <item>
-             <widget class="QGroupBox" name="groupBox_2">
-              <property name="minimumSize">
-               <size>
-                <width>200</width>
-                <height>200</height>
-               </size>
-              </property>
-              <property name="title">
-               <string>速度</string>
-              </property>
-              <layout class="QVBoxLayout" name="verticalLayout_12">
-               <item>
-                <layout class="QVBoxLayout" name="verticalLayout_4">
-                 <item>
-                  <widget class="QGroupBox" name="groupBox_12">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>300</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="title">
-                    <string>消息</string>
-                   </property>
-                   <layout class="QHBoxLayout" name="horizontalLayout_14">
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_7">
-                      <item>
-                       <widget class="QGroupBox" name="groupBox_4">
-                        <property name="maximumSize">
-                         <size>
-                          <width>16777215</width>
-                          <height>16777215</height>
-                         </size>
-                        </property>
-                        <property name="title">
-                         <string>Info</string>
-                        </property>
-                        <layout class="QGridLayout" name="gridLayout_8">
-                         <item row="0" column="0">
-                          <widget class="QListView" name="view_logging">
-                           <property name="minimumSize">
-                            <size>
-                             <width>300</width>
-                             <height>0</height>
-                            </size>
-                           </property>
-                           <property name="maximumSize">
-                            <size>
-                             <width>12312312</width>
-                             <height>12312312</height>
-                            </size>
-                           </property>
-                          </widget>
-                         </item>
-                        </layout>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </widget>
-            </item>
-           </layout>
+           <layout class="QVBoxLayout" name="verticalLayout_13"/>
           </widget>
          </widget>
         </item>
@@ -882,7 +806,7 @@ color:rgb(238, 238, 236);</string>
              </rect>
             </property>
             <property name="title">
-             <string>REmote Terminal</string>
+             <string>Remote Terminal</string>
             </property>
             <widget class="QWidget" name="layoutWidget_4">
              <property name="geometry">

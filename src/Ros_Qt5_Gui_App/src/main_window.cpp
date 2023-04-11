@@ -46,7 +46,7 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
     /*********************
     ** Logging
     **********************/
-    ui->view_logging->setModel(qnode.loggingModel());
+//    ui->view_logging->setModel(qnode.loggingModel());
 
     addtopic_form = new AddTopics();
     //绑定添加rviz话题信号
@@ -469,7 +469,7 @@ void MainWindow::slot_rosShutdown()
  * the user can always see the latest log message.
  */
 void MainWindow::updateLoggingView() {
-        ui->view_logging->scrollToBottom();
+//        ui->view_logging->scrollToBottom();
 }
 
 /*****************************************************************************

@@ -78,9 +78,6 @@ class MainWindow : public QMainWindow
       *******************************************/
         void on_actionAbout_triggered();
         void slot_rosShutdown();
-        void quick_cmds_check_change(int);
-        void cmd_output();
-        void cmd_error_output();
         void refreashTopicList();
         void RvizGetModel(QAbstractItemModel *model);
         /******************************************
@@ -94,8 +91,6 @@ class MainWindow : public QMainWindow
         void slot_move_camera_btn();
         //设置界面
         void slot_setting_frame();
-        void quick_cmd_add();
-        void quick_cmd_remove();
     private slots:
        
         void on_pushButton_add_topic_clicked();
@@ -118,9 +113,7 @@ private:
         void initData();
         QString JudgeDisplayNewName(QString name);
       
-        void connections();
-        void add_quick_cmd(QString name,QString shell);
-        
+        void connections();        
         void inform(QString);
         bool AskInform(QString);
         QString getUserName();

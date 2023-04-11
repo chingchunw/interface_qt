@@ -82,23 +82,12 @@ MainWindow::~MainWindow()
 void MainWindow::initUis()
 {
     ui->groupBox_3->setEnabled(false);
-//    m_DashBoard_x =new CCtrlDashBoard(ui->widget_speed_x);
-//    m_DashBoard_x->setGeometry(ui->widget_speed_x->rect());
-//    m_DashBoard_x->setValue(0);
-//    m_DashBoard_y =new CCtrlDashBoard(ui->widget_speed_y);
-//    m_DashBoard_y->setGeometry(ui->widget_speed_y->rect());
-//    m_DashBoard_y->setValue(0);
 
     ui->tab_manager->setCurrentIndex(0);
     ui->tabWidget->setCurrentIndex(0);
     
     ui->pushButton_remove_topic->setEnabled(false);
-    ui->pushButton_rename_topic->setEnabled(false);
-
-    //qucik treewidget
-    ui->treeWidget_quick_cmd->setHeaderLabels(QStringList()<<"key"<<"values");
-    ui->treeWidget_quick_cmd->setHeaderHidden(true);
-    
+    ui->pushButton_rename_topic->setEnabled(false);    
     ui->button_disconnect->setEnabled(false);
 }
 
@@ -164,9 +153,6 @@ void MainWindow::connections()
     QObject::connect(&qnode, SIGNAL(loggingUpdated()), this, SLOT(updateLoggingView()));
     QObject::connect(&qnode, SIGNAL(rosShutdown()), this, SLOT(slot_rosShutdown()));
     QObject::connect(&qnode, SIGNAL(Master_shutdown()), this, SLOT(slot_rosShutdown()));
-    //绑定快捷按钮相关函数
-    connect(ui->quick_cmd_add_btn,SIGNAL(clicked()),this,SLOT(quick_cmd_add()));
-    connect(ui->quick_cmd_remove_btn,SIGNAL(clicked()),this,SLOT(quick_cmd_remove()));
     //设置界面
     connect(ui->action_2,SIGNAL(triggered(bool)),this,SLOT(slot_setting_frame()));
     //设置2D Pose
@@ -273,122 +259,6 @@ QString MainWindow::JudgeDisplayNewName(QString name)
     }
     return name;
 }
-//快捷指令删除按钮
-void MainWindow::quick_cmd_remove()
-{
-    QTreeWidgetItem *curr=ui->treeWidget_quick_cmd->currentItem();
-    //没有选择节点
-    if(curr == nullptr) return;
-    //获取父节点
-    QTreeWidgetItem* parent=curr->parent();
-    //如果当前节点就为父节点
-    if(parent == nullptr)
-    {
-        ui->treeWidget_quick_cmd->takeTopLevelItem(ui->treeWidget_quick_cmd->indexOfTopLevelItem(curr));
-        delete curr;
-    }
-    else{
-        ui->treeWidget_quick_cmd->takeTopLevelItem(ui->treeWidget_quick_cmd->indexOfTopLevelItem(parent));
-        delete parent;
-    }
-}
-//快捷指令添加按钮
-void MainWindow::quick_cmd_add()
-{
-    QWidget *w=new QWidget;
-    //阻塞其他窗体
-    w->setWindowModality(Qt::ApplicationModal);
-    QLabel *name=new QLabel;
-    name->setText("名称:");
-    QLabel *content=new QLabel;
-    content->setText("脚本:");
-    QLineEdit *name_val=new QLineEdit;
-    QTextEdit *shell_val=new QTextEdit;
-    QPushButton *ok_btn=new QPushButton;
-    ok_btn->setText("ok");
-    ok_btn->setIcon(QIcon("://images/ok.png"));
-    QPushButton *cancel_btn=new QPushButton;
-    cancel_btn->setText("cancel");
-    cancel_btn->setIcon(QIcon("://images/false.png"));
-    QHBoxLayout *lay1=new QHBoxLayout;
-    lay1->addWidget(name);
-    lay1->addWidget(name_val);
-    QHBoxLayout *lay2=new QHBoxLayout;
-    lay2->addWidget(content);
-    lay2->addWidget(shell_val);
-    QHBoxLayout *lay3=new QHBoxLayout;
-    lay3->addWidget(ok_btn);
-    lay3->addWidget(cancel_btn);
-    QVBoxLayout *v1=new QVBoxLayout;
-    v1->addLayout(lay1);
-    v1->addLayout(lay2);
-    v1->addLayout(lay3);
-
-    w->setLayout(v1);
-    w->show();
-
-    connect(ok_btn,&QPushButton::clicked,[this,w,name_val,shell_val]
-    {
-        this->add_quick_cmd(name_val->text(),shell_val->toPlainText());
-        w->close();
-    });
-}
-//向treeWidget添加快捷指令
-void MainWindow::add_quick_cmd(QString name,QString val)
-{
-    if(name=="") return;
-    QTreeWidgetItem *head=new QTreeWidgetItem(QStringList()<<name);
-    this->ui->treeWidget_quick_cmd->addTopLevelItem(head);
-    QCheckBox *check=new QCheckBox;
-    //记录父子关系
-    this->widget_to_parentItem_map[check]=head;
-    //连接checkbox选中的槽函数
-    connect(check,SIGNAL(stateChanged(int)),this,SLOT(quick_cmds_check_change(int)));
-    this->ui->treeWidget_quick_cmd->setItemWidget(head,1,check);
-    QTreeWidgetItem *shell_content=new QTreeWidgetItem(QStringList()<<"shell");
-    QTextEdit *shell_val=new QTextEdit;
-    shell_val->setMaximumWidth(150);
-    shell_val->setMaximumHeight(40);
-    head->addChild(shell_content);
-    shell_val->setText(val);
-    this->ui->treeWidget_quick_cmd->setItemWidget(shell_content,1,shell_val);
-}
-//快捷指令按钮处理的函数
-void MainWindow::quick_cmds_check_change(int state)
-{
-
-    QCheckBox* check = qobject_cast<QCheckBox*>(sender());
-    QTreeWidgetItem *parent=widget_to_parentItem_map[check];
-    QString bash = static_cast<QTextEdit *>(ui->treeWidget_quick_cmd->itemWidget(parent->child(0),1))->toPlainText();
-    bool is_checked = state>1 ? true : false;
-    if(is_checked)
-    {
-        quick_cmd = new QProcess;
-        quick_cmd->start("bash");
-        qDebug() << bash;
-        quick_cmd->write(bash.toLocal8Bit()+'\n');
-        connect(quick_cmd,SIGNAL(readyReadStandardOutput()),this,SLOT(cmd_output()));
-         connect(quick_cmd,SIGNAL(readyReadStandardError()),this,SLOT(cmd_error_output()));
-    }
-    else{
-
-
-    }
-
-}
-//执行一些命令的回显
-void MainWindow::cmd_output()
-{
-
-    ui->cmd_output->append(quick_cmd->readAllStandardOutput());
-}
-//执行一些命令的错误回显
-void MainWindow::cmd_error_output()
-{
-    ui->cmd_output->append("<font color=\"#FF0000\">"+quick_cmd->readAllStandardError()+"</font> ");
-}
-
-
 
 /*****************************************************************************
 ** Implementation [Slots]
@@ -497,14 +367,6 @@ void MainWindow::ReadSettings() {
     bool remember = settings.value("remember_settings", false).toBool();
     ui->checkbox_remember_settings->setChecked(remember);
 
-    //读取快捷指令的setting
-    QSettings quick_setting("quick_setting","cyrobot_rviz_tree");
-    QStringList ch_key=quick_setting.childKeys();
-    for(auto c:ch_key)
-    {
-        add_quick_cmd(c,quick_setting.value(c,QString("")).toString());
-    }
-
 }
 
 void MainWindow::WriteSettings() {
@@ -516,15 +378,6 @@ void MainWindow::WriteSettings() {
     //settings.setValue("windowState", saveState());
     settings.setValue("remember_settings",QVariant(ui->checkbox_remember_settings->isChecked()));
 
-    //存下快捷指令的setting
-    QSettings quick_setting("quick_setting","cyrobot_rviz_tree");
-    quick_setting.clear();
-    for(int i=0;i<ui->treeWidget_quick_cmd->topLevelItemCount();i++)
-    {
-        QTreeWidgetItem *top=ui->treeWidget_quick_cmd->topLevelItem(i);
-        QTextEdit *cmd_val= static_cast<QTextEdit *>(ui->treeWidget_quick_cmd->itemWidget(top->child(0),1));
-        quick_setting.setValue(top->text(0),cmd_val->toPlainText());
-    }
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)

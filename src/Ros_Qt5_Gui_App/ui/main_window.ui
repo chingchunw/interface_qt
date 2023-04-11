@@ -383,7 +383,7 @@
            <cursorShape>ArrowCursor</cursorShape>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="tab">
            <attribute name="title">
@@ -666,123 +666,6 @@
              </layout>
             </item>
            </layout>
-          </widget>
-          <widget class="QWidget" name="tab_2">
-           <attribute name="title">
-            <string>Terminal</string>
-           </attribute>
-           <widget class="QGroupBox" name="groupBox_5">
-            <property name="geometry">
-             <rect>
-              <x>1</x>
-              <y>1</y>
-              <width>369</width>
-              <height>282</height>
-             </rect>
-            </property>
-            <property name="title">
-             <string>Local Terminal</string>
-            </property>
-            <widget class="QWidget" name="layoutWidget_3">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>20</y>
-               <width>351</width>
-               <height>251</height>
-              </rect>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_7">
-              <item>
-               <widget class="QPushButton" name="pushButton_22">
-                <property name="text">
-                 <string>Connected</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QTextEdit" name="textEdit">
-                <property name="styleSheet">
-                 <string notr="true">background-color:rgb(0, 0, 0);
-color:rgb(238, 238, 236);</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_10">
-                <item>
-                 <widget class="QLineEdit" name="lineEdit_6"/>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="pushButton_19">
-                  <property name="text">
-                   <string>Send</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-             </layout>
-            </widget>
-           </widget>
-           <widget class="QGroupBox" name="groupBox_7">
-            <property name="geometry">
-             <rect>
-              <x>1</x>
-              <y>289</y>
-              <width>369</width>
-              <height>361</height>
-             </rect>
-            </property>
-            <property name="title">
-             <string>Remote Terminal</string>
-            </property>
-            <widget class="QWidget" name="layoutWidget_4">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>32</y>
-               <width>351</width>
-               <height>321</height>
-              </rect>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_6">
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_9">
-                <item>
-                 <widget class="QPushButton" name="pushButton_20">
-                  <property name="text">
-                   <string>Connected</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <widget class="QTextEdit" name="textEdit_2">
-                <property name="styleSheet">
-                 <string notr="true">background-color:rgb(0, 0, 0);
-color:rgb(238, 238, 236);</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_8">
-                <item>
-                 <widget class="QLineEdit" name="lineEdit_8"/>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="pushButton_21">
-                  <property name="text">
-                   <string>Send</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-             </layout>
-            </widget>
-           </widget>
           </widget>
          </widget>
         </item>

@@ -19,7 +19,6 @@
 #include "settings.h"
 #include "qrviz.hpp"
 //仪表盘头文件
-#include "CCtrlDashBoard.h"
 #include "QProcess"
 #include <QStandardItemModel>
 #include <QTreeWidgetItem>
@@ -78,9 +77,6 @@ class MainWindow : public QMainWindow
       ** Auto-connections (connectSlotsByName())
       *******************************************/
         void on_actionAbout_triggered();
-//        void on_checkbox_use_environment_stateChanged(int state);
-        void slot_speed_x(double x);
-        void slot_speed_y(double y);
         void slot_rosShutdown();
         void quick_cmds_check_change(int);
         void cmd_output();
@@ -130,8 +126,6 @@ private:
         QString getUserName();
         
         QNode qnode;
-        CCtrlDashBoard *m_DashBoard_x;
-        CCtrlDashBoard *m_DashBoard_y;
         QProcess *quick_cmd = nullptr;
         QProcess *close_remote_cmd = nullptr;
         QProcess *base_cmd = nullptr;

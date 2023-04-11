@@ -82,12 +82,12 @@ MainWindow::~MainWindow()
 void MainWindow::initUis()
 {
     ui->groupBox_3->setEnabled(false);
-    m_DashBoard_x =new CCtrlDashBoard(ui->widget_speed_x);
-    m_DashBoard_x->setGeometry(ui->widget_speed_x->rect());
-    m_DashBoard_x->setValue(0);
-    m_DashBoard_y =new CCtrlDashBoard(ui->widget_speed_y);
-    m_DashBoard_y->setGeometry(ui->widget_speed_y->rect());
-    m_DashBoard_y->setValue(0);
+//    m_DashBoard_x =new CCtrlDashBoard(ui->widget_speed_x);
+//    m_DashBoard_x->setGeometry(ui->widget_speed_x->rect());
+//    m_DashBoard_x->setValue(0);
+//    m_DashBoard_y =new CCtrlDashBoard(ui->widget_speed_y);
+//    m_DashBoard_y->setGeometry(ui->widget_speed_y->rect());
+//    m_DashBoard_y->setValue(0);
 
     ui->tab_manager->setCurrentIndex(0);
     ui->tabWidget->setCurrentIndex(0);
@@ -164,9 +164,6 @@ void MainWindow::connections()
     QObject::connect(&qnode, SIGNAL(loggingUpdated()), this, SLOT(updateLoggingView()));
     QObject::connect(&qnode, SIGNAL(rosShutdown()), this, SLOT(slot_rosShutdown()));
     QObject::connect(&qnode, SIGNAL(Master_shutdown()), this, SLOT(slot_rosShutdown()));
-    //connect速度的信号
-    connect(&qnode,SIGNAL(speed_x(double)),this,SLOT(slot_speed_x(double)));
-    connect(&qnode,SIGNAL(speed_y(double)),this,SLOT(slot_speed_y(double)));
     //绑定快捷按钮相关函数
     connect(ui->quick_cmd_add_btn,SIGNAL(clicked()),this,SLOT(quick_cmd_add()));
     connect(ui->quick_cmd_remove_btn,SIGNAL(clicked()),this,SLOT(quick_cmd_remove()));
@@ -211,7 +208,6 @@ void MainWindow::slot_set_2D_Pos()
 void MainWindow::slot_set_2D_Goal()
 {
   map_rviz_->Set_Goal();
-//  ui->label_map_msg->setText("请在地图中选择机器人导航的目标位置");
 }
 void MainWindow::slot_move_camera_btn()
 {
@@ -462,21 +458,6 @@ void MainWindow::slot_rosShutdown()
     ui->line_edit_host->setReadOnly(false);
     ui->line_edit_topic->setReadOnly(false);
 }
-
-void MainWindow::slot_speed_x(double x)
-{
-    if(x>=0) ui->label_dir_x->setText("Forward");
-    else ui->label_dir_x->setText("Backward");
-
-    m_DashBoard_x->setValue(abs(x*100));
-}
-void MainWindow::slot_speed_y(double x)
-{
-    if(x>=0) ui->label_dir_y->setText("Forward");
-    else ui->label_dir_y->setText("Backward");
-    m_DashBoard_y->setValue(abs(x*100));
-}
-
 
 /*****************************************************************************
 ** Implemenation [Slots][manually connected]

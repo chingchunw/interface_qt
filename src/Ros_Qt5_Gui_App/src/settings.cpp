@@ -6,23 +6,6 @@ Settings::Settings(QWidget *parent) :
     ui(new Ui::Settings)
 {
     ui->setupUi(this);
-//    QSettings video_topic_setting("video_topic","cyrobot_monitor");
-//    QStringList names=video_topic_setting.value("names").toStringList();
-//    QStringList topics=video_topic_setting.value("topics").toStringList();
-//    if(names.size()==4)
-//    {
-//        ui->video0_name_set->setText(names[0]);
-//        ui->video0_name_set_2->setText(names[1]);
-//        ui->video0_name_set_3->setText(names[2]);
-//        ui->video0_name_set_4->setText(names[3]);
-//    }
-//    if(topics.size()==4)
-//    {
-//        ui->video0_topic_set->setText(topics[0]);
-//        ui->video0_topic_set_2->setText(topics[1]);
-//        ui->video0_topic_set_3->setText(topics[2]);
-//        ui->video0_topic_set_4->setText(topics[3]);
-//    }
 
     QSettings main_setting("topic_setting","cyrobot_monitor");
     ui->lineEdit_odm->setText(main_setting.value("topic_odom","raw_odom").toString());

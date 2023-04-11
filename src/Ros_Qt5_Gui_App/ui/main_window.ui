@@ -667,20 +667,6 @@
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="tab_4">
-           <attribute name="title">
-            <string>Command</string>
-           </attribute>
-           <layout class="QVBoxLayout" name="verticalLayout_18">
-            <item>
-             <layout class="QVBoxLayout" name="verticalLayout_17">
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_13"/>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </widget>
           <widget class="QWidget" name="tab_2">
            <attribute name="title">
             <string>Terminal</string>

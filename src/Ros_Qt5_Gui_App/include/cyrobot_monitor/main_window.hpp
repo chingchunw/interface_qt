@@ -82,7 +82,6 @@ class MainWindow : public QMainWindow
         void on_checkbox_use_environment_stateChanged(int state);
         void slot_speed_x(double x);
         void slot_speed_y(double y);
-        void slot_power(float p);
         void slot_rosShutdown();
         void quick_cmds_check_change(int);
         void cmd_output();
@@ -105,12 +104,6 @@ class MainWindow : public QMainWindow
         void slot_move_camera_btn();
         //设置界面
         void slot_setting_frame();
-        //设置返航点
-        void slot_set_return_point();
-        //返航
-        void slot_return_point();
-        //机器人位置
-        void slot_position_change(QString,double,double,double,double);
         void quick_cmd_add();
         void quick_cmd_remove();
         //显示图像
@@ -121,13 +114,9 @@ class MainWindow : public QMainWindow
     
     
         void on_pushButton_add_topic_clicked();
-        
-        void on_pushButton_remove_topic_clicked();
-        
-        void on_pushButton_rename_topic_clicked();
-        
-        void on_treeView_rvizDisplayTree_clicked(const QModelIndex &index);
-        
+        void on_pushButton_remove_topic_clicked();       
+        void on_pushButton_rename_topic_clicked();       
+        void on_treeView_rvizDisplayTree_clicked(const QModelIndex &index);      
         void on_button_disconnect_clicked();
         
         /// \brief 导入rviz Display配置
@@ -171,7 +160,6 @@ private:
         //存放display的当前值 item名，参数名称和值
         QMap <QTreeWidgetItem*,QMap<QString,QString>> tree_rviz_values;
         Settings *set = nullptr;
-        QSoundEffect *media_player = nullptr;
         
         QAbstractItemModel* m_modelRvizDisplay;
         

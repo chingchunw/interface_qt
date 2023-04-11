@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.9.2, 2023-04-05T22:44:43. -->
+<!-- Written by QtCreator 4.9.2, 2023-04-09T21:31:47. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -107,11 +107,11 @@
     <valuelist type="QVariantList" key="ProjectExplorer.BuildConfiguration.UserEnvironmentChanges">
      <value type="QString">CMAKE_PREFIX_PATH=/home/chun/interface_qt/devel:/home/chun/realsense_ws/devel:/home/chun/ws/devel:/opt/ros/noetic</value>
      <value type="QString">LD_LIBRARY_PATH=/home/chun/interface_qt/devel/lib:/home/chun/realsense_ws/devel/lib:/home/chun/ws/devel/lib:/opt/ros/noetic/lib:/opt/ros/noetic/lib/x86_64-linux-gnu</value>
-     <value type="QString">OLDPWD</value>
      <value type="QString">PKG_CONFIG_PATH=/home/chun/interface_qt/devel/lib/pkgconfig:/home/chun/realsense_ws/devel/lib/pkgconfig:/home/chun/ws/devel/lib/pkgconfig:/opt/ros/noetic/lib/pkgconfig:/opt/ros/noetic/lib/x86_64-linux-gnu/pkgconfig</value>
+     <value type="QString">PWD=/home/chun/interface_qt</value>
      <value type="QString">ROSLISP_PACKAGE_DIRECTORIES=/home/chun/interface_qt/devel/share/common-lisp:/home/chun/realsense_ws/devel/share/common-lisp:/home/chun/ws/devel/share/common-lisp</value>
      <value type="QString">ROS_PACKAGE_PATH=/home/chun/interface_qt/src:/home/chun/realsense_ws/src:/home/chun/ws/src:/opt/ros/noetic/share</value>
-     <value type="QString">SHLVL=57</value>
+     <value type="QString">SHLVL=103</value>
      <value type="QString">TERM=xterm</value>
      <value type="QString">_=/usr/bin/env</value>
     </valuelist>

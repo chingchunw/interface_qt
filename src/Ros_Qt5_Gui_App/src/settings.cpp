@@ -26,9 +26,9 @@ Settings::Settings(QWidget *parent) :
 
     QSettings main_setting("topic_setting","cyrobot_monitor");
     ui->lineEdit_odm->setText(main_setting.value("topic_odom","raw_odom").toString());
-    ui->lineEdit_power->setText(main_setting.value("topic_power","power").toString());
-    ui->lineEdit_power_min->setText(main_setting.value("power_min","10").toString());
-    ui->lineEdit_power_max->setText(main_setting.value("power_max","12").toString());
+//    ui->lineEdit_power->setText(main_setting.value("topic_power","power").toString());
+//    ui->lineEdit_power_min->setText(main_setting.value("power_min","10").toString());
+//    ui->lineEdit_power_max->setText(main_setting.value("power_max","12").toString());
 //    ui->lineEdit_odom->setText(main_setting.value("odom_topic","amcl_pose").toString());
     connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(slot_ok_btn_click()));
     connect(ui->pushButton_2,SIGNAL(clicked()),this,SLOT(slot_cancel_btn_click()));
@@ -37,9 +37,9 @@ void Settings::slot_ok_btn_click()
 {
     QSettings main_setting("topic_setting","cyrobot_monitor");
     main_setting.setValue("topic_odom",ui->lineEdit_odm->text());
-    main_setting.setValue("topic_power",ui->lineEdit_power->text());
-    main_setting.setValue("power_min",ui->lineEdit_power_min->text());
-    main_setting.setValue("power_max",ui->lineEdit_power_max->text());
+//    main_setting.setValue("topic_power",ui->lineEdit_power->text());
+//    main_setting.setValue("power_min",ui->lineEdit_power_min->text());
+//    main_setting.setValue("power_max",ui->lineEdit_power_max->text());
 //    main_setting.setValue("odom_topic",ui->lineEdit_odom->text());
 
     QSettings video_topic_setting("video_topic","cyrobot_monitor");

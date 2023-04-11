@@ -11,6 +11,7 @@
 
 #include <QtGui>
 #include <QMessageBox>
+#include<QDebug>
 #include <iostream>
 #include "../include/cyrobot_monitor/main_window.hpp"
 
@@ -46,7 +47,7 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
     ** Logging
     **********************/
     ui->view_logging->setModel(qnode.loggingModel());
-    
+
     addtopic_form = new AddTopics();
     //绑定添加rviz话题信号
     connect(addtopic_form, SIGNAL(Topic_choose(QTreeWidgetItem *, QString)), this, SLOT(slot_choose_topic(QTreeWidgetItem *, QString)));
@@ -138,18 +139,21 @@ void MainWindow::initData()
 //订阅video话题
 void MainWindow::initVideos()
 {
-
+   //創建QSettings Object -> 通過指定公司或組織名稱以及產品名稱，例如：公司名稱爲：video_topic，產品名爲：cyrobot_monitor
    QSettings video_topic_setting("video_topic","cyrobot_monitor");
-   QStringList names=video_topic_setting.value("names").toStringList();
-   QStringList topics=video_topic_setting.value("topics").toStringList();
-   if(names.size()==4)
+   QStringList names = video_topic_setting.value("names").toStringList();
+   QStringList topics = video_topic_setting.value("topics").toStringList();
+   //"/home/chun/.config/video_topic/cyrobot_monitor.conf"
+   //qDebug() << video_topic_setting.filename();
+   qDebug() << video_topic_setting.value("names") << "///" << video_topic_setting.value("topics");  //QVariant(Invalid)
+   if(names.size()>=4)
    {
        ui->label_v_name0->setText(names[0]);
        ui->label_v_name1->setText(names[1]);
        ui->label_v_name2->setText(names[2]);
        ui->label_v_name3->setText(names[3]);
    }
-   if(topics.size()==4)
+   if(topics.size()>=4)
    {
        if(topics[0]!="")
         qnode.Sub_Image(topics[0],0);
@@ -162,7 +166,7 @@ void MainWindow::initVideos()
 
    }
 
-   //链接槽函数
+   //QObject::connect(監聽的物件, 監聽的事件, 事件接收者, 事件的處理函數);
    connect(&qnode,SIGNAL(Show_image(int,QImage)),this,SLOT(slot_show_image(int,QImage)));
 
 
@@ -218,10 +222,6 @@ void MainWindow::connections()
     //connect速度的信号
     connect(&qnode,SIGNAL(speed_x(double)),this,SLOT(slot_speed_x(double)));
     connect(&qnode,SIGNAL(speed_y(double)),this,SLOT(slot_speed_y(double)));
-    //电源的信号
-    connect(&qnode,SIGNAL(power(float)),this,SLOT(slot_power(float)));
-    //机器人位置信号
-    connect(&qnode,SIGNAL(position(QString,double,double,double,double)),this,SLOT(slot_position_change(QString,double,double,double,double)));
     //绑定快捷按钮相关函数
     connect(ui->quick_cmd_add_btn,SIGNAL(clicked()),this,SLOT(quick_cmd_add()));
     connect(ui->quick_cmd_remove_btn,SIGNAL(clicked()),this,SLOT(quick_cmd_remove()));
@@ -247,10 +247,6 @@ void MainWindow::connections()
     connect(ui->move_camera_btn,SIGNAL(clicked()),this,SLOT(slot_move_camera_btn()));
     //设置Select
     connect(ui->set_select_btn,SIGNAL(clicked()),this,SLOT(slot_set_select()));
-    //设置返航点
-    connect(ui->set_return_btn,SIGNAL(clicked()),this,SLOT(slot_set_return_point()));
-    //返航
-    connect(ui->return_btn,SIGNAL(clicked()),this,SLOT(slot_return_point()));
     //左工具栏tab索引改变
     connect(ui->tab_manager,SIGNAL(currentChanged(int)),this,SLOT(slot_tab_manage_currentChanged(int)));
     //右工具栏索引改变
@@ -275,54 +271,6 @@ void MainWindow::slot_setting_frame()
         set->show();
     }
     //绑定set确认按钮点击事件
-}
-//刷新当前坐标
-void MainWindow::slot_position_change(QString frame,double x,double y,double z,double w)
-{
-    //更新ui显示
-    ui->label_frame->setText(frame);
-    ui->label_x->setText(QString::number(x));
-    ui->label_y->setText(QString::number(y));
-    ui->label_z->setText(QString::number(z));
-    ui->label_w->setText(QString::number(w));
-}
-//刷新返航地点
-void MainWindow::slot_set_return_point()
-{
-    //更新ui返航点显示
-    ui->label_return_x->setText(ui->label_x->text());
-    ui->label_return_y->setText(ui->label_y->text());
-    ui->label_return_z->setText(ui->label_z->text());
-    ui->label_return_w->setText(ui->label_w->text());
-    //写入setting
-    QSettings settings("return-position", "cyrobot_monitor");
-    settings.setValue("x",ui->label_x->text());
-    settings.setValue("y",ui->label_y->text());
-    settings.setValue("z",ui->label_z->text());
-    settings.setValue("w",ui->label_w->text());
-    //发出声音提醒
-    if(media_player!=nullptr)
-     {
-         delete media_player;
-         media_player=nullptr;
-     }
-     media_player=new QSoundEffect;
-     media_player->setSource(QUrl::fromLocalFile("://media/refresh_return.wav"));
-     media_player->play();
-
-}
-//返航
-void MainWindow::slot_return_point()
-{
-    qnode.set_goal(ui->label_frame->text(),ui->label_return_x->text().toDouble(),ui->label_return_y->text().toDouble(),ui->label_return_z->text().toDouble(),ui->label_return_w->text().toDouble());
-    if(media_player!=nullptr)
-       {
-           delete media_player;
-           media_player=nullptr;
-       }
-       media_player=new QSoundEffect;
-       media_player->setSource(QUrl::fromLocalFile("://media/start_return.wav"));
-       media_player->play();
 }
 //设置导航当前位置按钮的槽函数
 void MainWindow::slot_set_2D_Pos()
@@ -360,11 +308,8 @@ void MainWindow::slot_choose_topic(QTreeWidgetItem *choose, QString name)
     map_rviz_->DisplayInit(m_mapRvizDisplays[ClassID], name, true, namevalue);
 }
 
-///
-/// \brief 检查重名
-/// \param name
-/// \return 
-///
+//
+
 QString MainWindow::JudgeDisplayNewName(QString name)
 {
     if (m_modelRvizDisplay != nullptr)
@@ -669,22 +614,7 @@ void MainWindow::slot_rosShutdown()
     ui->line_edit_host->setReadOnly(false);
     ui->line_edit_topic->setReadOnly(false);
 }
-void MainWindow::slot_power(float p)
-{
-    ui->label_power->setText(QString::number(static_cast<double>(p)).mid(0,5)+"V");
-    double n=(static_cast<double>(p)-10)/1.5;
-    int value = static_cast<int>(n*100);
-    ui->progressBar->setValue(value>100?100:value);
-    //当电量过低时发出提示
-    if(n*100<=20)
-    {
-         ui->progressBar->setStyleSheet("QProgressBar::chunk {background-color: red;width: 20px;} QProgressBar {border: 2px solid grey;border-radius: 5px;text-align: center;}");
-          // QMessageBox::warning(NULL, "电量不足", "电量不足，请及时充电！", QMessageBox::Yes , QMessageBox::Yes);
-    }
-    else{
-        ui->progressBar->setStyleSheet("QProgressBar {border: 2px solid grey;border-radius: 5px;text-align: center;}");
-    }
-}
+
 void MainWindow::slot_speed_x(double x)
 {
     if(x>=0) ui->label_dir_x->setText("Forward");
@@ -755,11 +685,11 @@ void MainWindow::ReadSettings() {
     	//ui->line_edit_topic->setEnabled(false);
     }
 
-    QSettings return_pos("return-position","cyrobot_rviz_tree");
-    ui->label_return_x->setText(return_pos.value("x",QString("0")).toString());
-    ui->label_return_y->setText(return_pos.value("y",QString("0")).toString());
-    ui->label_return_z->setText(return_pos.value("z",QString("0")).toString());
-    ui->label_return_w->setText(return_pos.value("w",QString("0")).toString());
+//    QSettings return_pos("return-position","cyrobot_rviz_tree");
+//    ui->label_return_x->setText(return_pos.value("x",QString("0")).toString());
+//    ui->label_return_y->setText(return_pos.value("y",QString("0")).toString());
+//    ui->label_return_z->setText(return_pos.value("z",QString("0")).toString());
+//    ui->label_return_w->setText(return_pos.value("w",QString("0")).toString());
 
     //读取快捷指令的setting
     QSettings quick_setting("quick_setting","cyrobot_rviz_tree");
